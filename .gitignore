@@ -5,4 +5,5 @@ out/
 .env*
 !.env.example
 *.tsbuildinfo
+lib/blackjack/catalog.json.tmp
 next-env.d.ts
