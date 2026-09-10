@@ -1,5 +1,5 @@
 import { easternDay } from "../../../lib/blackjack/dates";
-import { actions, replay, type Action } from "../../../lib/blackjack/engine.mjs";
+import { actions, canPlayJoker, replay, type Action } from "../../../lib/blackjack/engine.mjs";
 import { cookieTicket, dailyFor, entryFor, responseFor, verify } from "../../../lib/blackjack/server";
 
 export const runtime = "nodejs";
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
     if (JSON.stringify(latest.moves) !== JSON.stringify(ticket.moves)) return responseFor(dailyFor(latest.moves, now), 409);
     const entry = entryFor(id);
     const state = replay(entry.deck, latest.moves, entry.rulesVersion);
-    if (!actions(state).includes(body.action)) return error("That action is no longer available.", 400);
+    if (body.action === "joker" ? !canPlayJoker(state) : !actions(state).includes(body.action)) return error("That action is no longer available.", 400);
     return responseFor(dailyFor([...latest.moves, body.action as Action], now));
   } catch (err) {
     if (err instanceof SyntaxError) return error("That action could not be read.", 400);

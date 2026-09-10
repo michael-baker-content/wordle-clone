@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { cardName, RANKS, total } from "../lib/blackjack/engine.mjs";
+import { cardName, JOKER, RANKS, total } from "../lib/blackjack/engine.mjs";
 import { cardsPerRow } from "./card-layout";
 
 type Table = { id: string; round: number; player: number[]; dealer: (number | null)[] };
@@ -13,6 +13,7 @@ const STAGGER_MS = 90;
 
 function Face({ value }: { value: number | null }) {
   const [failed, setFailed] = useState(false);
+  if (value === JOKER) return <div className="card-art joker-art"><span className="joker-corner">Joker<small>1–11</small></span>{!failed && <img src="/cards/J-1.svg" width="72" height="101" alt="" onError={() => setFailed(true)} />}</div>;
   const suit = value === null ? 0 : Math.floor(value / 13);
   const rank = value === null ? "" : RANKS[value % 13];
   const file = value === null ? "B-1" : `${["C", "D", "H", "S"][suit]}-${rank}`;

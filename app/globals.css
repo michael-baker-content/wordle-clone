@@ -117,6 +117,7 @@ html,body{min-width:320px}
 @media(max-width:520px){.run-totals{gap:8px}.daily-date{font-size:14px;letter-spacing:.5px}}
 .brand-name{display:flex;flex-direction:column;gap:3px;line-height:1}
 .brand-name small{font-family:var(--font-label),"Arial Narrow",Arial,sans-serif;font-size:12px;font-weight:500;letter-spacing:1.6px;color:var(--muted)}
+.header-actions{display:flex;align-items:center;gap:8px}.sound-button{width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:transparent;font-size:19px}.sound-off{color:#a86b68;border-color:#805451;opacity:.62}.sound-on{color:var(--gold);border-color:#a9854e;box-shadow:0 0 12px #dfbd7626}
 .hand-cards{min-height:101px;container-type:inline-size}
 .card-row{display:flex;max-width:100%;isolation:isolate;margin-bottom:12px}
 .card-row:last-child{margin-bottom:0}
@@ -130,12 +131,17 @@ html,body{min-width:320px}
 .card-obverse{transform:rotateY(180deg)}
 .card-art{position:absolute;inset:0;background:#fffdf7;color:#172d25}
 .card-art.red-card{color:#b5473a}
+.joker-art{color:#664a22}
+.joker-corner{position:absolute;top:4px;left:3px;font-size:19px;line-height:1;text-align:center}
+.joker-corner small{display:block;font:9px Arial,sans-serif;margin-top:3px}
+.joker-mark{position:absolute;right:8px;bottom:10px;font-size:30px}
+.joker-button{width:100%;margin-top:10px}
 .card-art img{position:absolute;z-index:2;inset:0;width:100%;height:100%;object-fit:fill}
 .card-art-back{border:3px solid #f6f0dc;border-radius:6px;background:repeating-linear-gradient(45deg,#355e52 0,#355e52 3px,#467664 3px,#467664 5px)}
 .readable-corner{position:absolute;z-index:1;top:3px;left:3px;width:25px;padding:2px 0 3px;background:#fffdf7;border-radius:2px;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:700;line-height:1;text-align:center;font-variant-numeric:lining-nums}
 .readable-corner small{display:block;font-size:17px;line-height:1;margin-top:2px}
 .empty-hand{display:flex;gap:8px}
-.empty-hand .card-placeholder{width:72px;height:101px}
+.empty-hand .card-placeholder{width:72px;height:101px;background:#10291f55}
 .table{overflow:hidden}
 @media(max-width:520px){
   .play-stage{display:flex;flex-direction:column;min-height:calc(100svh - 86px);min-height:calc(100dvh - 86px);padding-bottom:16px}

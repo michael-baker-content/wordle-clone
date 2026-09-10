@@ -2,8 +2,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import AnimatedScore from "./animated-score";
 import CardTable from "./card-table";
-import { cardName, RANKS, type Action } from "../lib/blackjack/engine.mjs";
-import { HELP_KEY, STORAGE_KEY, isFinished, readHistory, shareText, detailedShareText, statistics, type Daily, type History } from "../lib/blackjack/client";
+import { cardName, jokerPrice, RANKS, type Action } from "../lib/blackjack/engine.mjs";
+import { HELP_KEY, STORAGE_KEY, SOUND_KEY, isFinished, readHistory, shareText, detailedShareText, statistics, type Daily, type History } from "../lib/blackjack/client";
+import { playSound, unlockSound, stopSound } from "./sound";
 
 const SUITS = ["♣", "♦", "♥", "♠"];
 export default function Home() {
@@ -19,6 +20,9 @@ export default function Home() {
   const [notice, setNotice] = useState("");
   const [seconds, setSeconds] = useState(0);
   const [canShare, setCanShare] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
+  const soundEnabled = useRef(false);
+  soundEnabled.current = soundOn;
   const [manual, setManual] = useState("");
   const help = useRef<HTMLDialogElement>(null);
   const current = useRef<Daily | null>(null);
@@ -59,10 +63,15 @@ export default function Home() {
     finally { working.current = false; setBusy(false); }
   }, [accept]);
   useEffect(() => {
+    // Remove the previous game's data; only the new version's keys are read below.
+    try {
+      for (const key of ["daily-blackjack:history:v1", "daily-blackjack:help:v1", "jacklet:sound"]) localStorage.removeItem(key);
+    } catch {}
     try { saved.current = readHistory(localStorage.getItem(STORAGE_KEY)); setHistory(saved.current); }
     catch { setWarning("Some saved statistics couldn’t be read. We’ll try to recover your current run from this browser’s cookie."); }
     try { if (!localStorage.getItem(HELP_KEY)) help.current?.showModal(); } catch { help.current?.showModal(); }
     setCanShare(typeof navigator.share === "function");
+    try { setSoundOn(localStorage.getItem(SOUND_KEY) === "on"); } catch {}
     void load();
     const visible = () => { if (document.visibilityState === "visible") void load(); };
     const sync = (event: StorageEvent) => {
@@ -83,12 +92,16 @@ export default function Home() {
   async function play(action: Action) {
     const d = current.current;
     if (!d || working.current || animationLock.current || seconds === 0 || isFinished(d.run)) return;
+    if (soundOn) unlockSound();
     working.current = true; setBusy(true); setPendingAction(action); setError(""); setNotice("");
     const send = async () => {
       const response = await fetch("/api/blackjack", {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:d.id,token:d.run.token,action})});
       const data = await response.json();
       if (!response.ok && response.status !== 409) throw new Error(data.error);
       accept(data);
+      if (soundEnabled.current && response.ok && data.id === d.id && data.run.revision > d.run.revision) {
+        playSound(data.run.phase === "lost" ? "lose" : data.run.handsWon > d.run.handsWon ? "win" : ["between", "cleared"].includes(data.run.phase) ? "push" : "card");
+      }
       if (response.status === 409) setNotice("Your latest progress has been restored. Review the table before playing.");
     };
     try { if (navigator.locks) await navigator.locks.request("daily-blackjack-action",send); else await send(); }
@@ -96,6 +109,13 @@ export default function Home() {
     finally { working.current = false; setBusy(false); setPendingAction(null); }
   }
   function closeHelp() { help.current?.close(); try { localStorage.setItem(HELP_KEY,"seen"); } catch {} }
+  function toggleSound() {
+    const next = !soundOn;
+    soundEnabled.current = next;
+    setSoundOn(next);
+    try { localStorage.setItem(SOUND_KEY,next ? "on" : "off"); } catch {}
+    if (next) playSound("click"); else stopSound();
+  }
   const run = daily?.run, done = !!run && isFinished(run);
   const dateParts = daily?.id.split("-");
   const month = dateParts ? ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."][Number(dateParts[1]) - 1] : "";
@@ -113,7 +133,7 @@ export default function Home() {
     catch (err) { if (!(err instanceof DOMException && err.name === "AbortError")) await copy(); }
   }
   return <main className="shell">
-    <header className="header"><a className="wordmark" href="/"><span className="logo" aria-hidden="true">♠</span><span className="brand-name">Jacklet<small>daily blackjack</small></span></a><button className="help-button" aria-label="How to play" onClick={()=>help.current?.showModal()}>?</button></header>
+    <header className="header"><a className="wordmark" href="/"><span className="logo" aria-hidden="true">♠</span><span className="brand-name">Jacklet<small>daily blackjack</small></span></a><div className="header-actions"><button className={`sound-button ${soundOn ? "sound-on" : "sound-off"}`} aria-label={soundOn ? "Mute sounds" : "Enable sounds"} aria-pressed={soundOn} onClick={toggleSound}>♪</button><button className="help-button" aria-label="How to play" onClick={()=>help.current?.showModal()}>?</button></div></header>
     <div className="game">
       <h1 className="sr-only">Jacklet</h1>
       <div className="play-stage">
@@ -127,6 +147,7 @@ export default function Home() {
         <div className="hand-separator message-separator" aria-hidden="true" />
         <p className="table-message" role="status">{busy ? "Loading…" : !run ? "Loading…" : cardsAnimating || run.phase === "ready" || run.phase === "player" ? "" : run.message}</p>
         {!done && <div className="table-actions">{run?.phase === "player" ? <><button className="primary" aria-busy={pendingAction === "hit"} disabled={busy || cardsAnimating || !seconds || !!error} onClick={()=>play("hit")}>Hit</button><button className="secondary" aria-busy={pendingAction === "stand"} disabled={busy || cardsAnimating || !seconds || !!error} onClick={()=>play("stand")}>Stand</button></> : <button className="primary" aria-busy={pendingAction === "deal"} disabled={!daily || busy || cardsAnimating || !seconds || !!error} onClick={()=>play("deal")}>{run?.phase === "between" ? "Next hand" : "Deal"}</button>}</div>}
+        {run?.phase === "player" && <button className="secondary joker-button" disabled={!run.canPlayJoker || busy || cardsAnimating || !seconds || !!error} aria-busy={pendingAction === "joker"} onClick={() => play("joker")}>🃏 Play joker · {jokerPrice(run)} pts.</button>}
       </section>
       </div>
       {error && <div className="error" role="alert">{error} <button className="text-button" onClick={load} disabled={busy}>Recover run</button></div>}
@@ -159,6 +180,7 @@ export default function Home() {
         <li><strong>Win or push</strong> to continue. A loss ends your run.</li>
         <li>Dealer stands on <strong>soft 17</strong> and checks blackjack. Naturals beat other 21s. No bets or splits.</li>
         <li><strong>100 points per win + 1 per revealed card.</strong> Dealer and losing cards count. Bust: reveal the hole card; no draws.</li>
+        <li><strong>Jokers: 50, 100, 150 pts…</strong> Price rises each purchase this run. Worth 1–11; no deck card used. At 21, stand.</li>
         <li><strong>End of deck:</strong> {daily?.rulesVersion === "blackjack-v1" ? "flip the hole card and finish before settling the hand." : "score the last hand, even below dealer 17. Fewer than four left? End the run; leave them undealt."}</li>
         <li>Your final score earns <strong>1–5 stars</strong> for today’s challenge.</li>
       </ul>

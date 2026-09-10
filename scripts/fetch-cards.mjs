@@ -6,7 +6,7 @@ const base = 'https://raw.githubusercontent.com/letele/playing-cards/main/';
 const directory = new URL('../public/cards/', import.meta.url);
 const ranks = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 const names = ['C','D','H','S'].flatMap(suit => ranks.map(rank => `${suit}-${rank}.svg`));
-names.push('B-1.svg');
+names.push('B-1.svg', 'J-1.svg');
 const files = [];
 for (const name of [...names,'LICENSE']) {
   const url = base + (name === 'LICENSE' ? name : `assets/${name}`);
@@ -18,4 +18,4 @@ for (const name of [...names,'LICENSE']) {
 }
 await mkdir(directory,{recursive:true});
 for (const [name,text] of files) await writeFile(new URL(name,directory),text);
-console.log('Saved 53 CC0 card images and their license in public/cards. Commit this folder with the game.');
+console.log('Saved 54 CC0 card images and their license in public/cards. Commit this folder with the game.');

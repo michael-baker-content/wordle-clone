@@ -1,5 +1,5 @@
 import { previousDay } from "./dates";
-import { RANKS, type Phase } from "./engine.mjs";
+import { JOKER, jokerSpend, jokerValues, RANKS, type Phase } from "./engine.mjs";
 
 export type Run = {
   id: string; token: string; revision: number;
@@ -7,12 +7,12 @@ export type Run = {
   score: number; cardsTurned: number; stars: number; round: number; handsWon: number; message: string;
   revealed: number[];
   playerHands?: number[][];
+  jokersBought?: number;
+  canPlayJoker?: boolean;
 };
 export type Daily = { id: string; serverTime: string; resetsAt: string; rulesVersion: string; run: Run };
 export type History = Record<string, Run>;
-// Retain established storage identifiers so the Jacklet rename preserves progress.
-export const STORAGE_KEY = "daily-blackjack:history:v1";
-export const HELP_KEY = "daily-blackjack:help:v1";
+export { STORAGE_KEY, HELP_KEY, SOUND_KEY } from "./progress";
 export function isFinished(run: Run) { return run.phase === "lost" || run.phase === "cleared"; }
 export function statistics(history: History, today: string) {
   const played = Object.values(history).filter(r => r.revision > 0);
@@ -37,23 +37,28 @@ export function readHistory(raw: string | null): History {
       !["player", "between", "lost", "cleared"].includes(r.phase) ||
       !Number.isInteger(r.score) || r.score < 0 || r.score > 1352 ||
       !Number.isInteger(r.stars) || r.stars < 0 || r.stars > 5 ||
-      !Array.isArray(r.player) || !r.player.every(card) || !Array.isArray(r.dealer) || !r.dealer.every(c => c === null || card(c)) ||
+      !Array.isArray(r.player) || !r.player.every(c => c === JOKER || card(c)) || !Array.isArray(r.dealer) || !r.dealer.every(c => c === null || card(c)) ||
       !Array.isArray(r.revealed) || !r.revealed.every(card)) continue;
     if (r.handsWon !== undefined && (!Number.isInteger(r.handsWon) || r.handsWon < 0 || r.handsWon > r.round)) continue;
     if (!Number.isInteger(r.round) || r.round < 1 || r.round > 13) continue;
     const cardsTurned = r.cardsTurned ?? r.score;
     const handsWon = r.handsWon ?? 0;
+    const jokersBought = r.jokersBought ?? 0;
+    if (!Number.isInteger(jokersBought) || jokersBought < 0 || jokersBought > 27) continue;
     if (!Number.isInteger(cardsTurned) || cardsTurned < 0 || cardsTurned > 52) continue;
-    if (r.cardsTurned !== undefined && r.score !== handsWon * 100 + cardsTurned) continue;
+    if (r.cardsTurned !== undefined && r.score !== handsWon * 100 + cardsTurned - jokerSpend(jokersBought) && r.score !== handsWon * 100 + cardsTurned - jokersBought * 50) continue;
     // Migrate card-only saves; server replay restores today's authoritative result.
-    result[id] = { ...r, cardsTurned, handsWon, score: handsWon * 100 + cardsTurned };
+    result[id] = { ...r, cardsTurned, handsWon, score: r.cardsTurned === undefined ? handsWon * 100 + cardsTurned : r.score };
   }
   return result;
 }
 
 export function detailedShareText(run: Run) {
   const suits = ["♣", "♦", "♥", "♠"];
-  const hands = (run.playerHands ?? []).map((cards, index) =>
-    `Hand ${index + 1}: ${cards.map(card => RANKS[card % 13] + suits[Math.floor(card / 13)]).join(" ")}`);
+  const hands = (run.playerHands ?? []).map((cards, index) => {
+    const values = jokerValues(cards);
+    let jokerIndex = 0;
+    return `Hand ${index + 1}: ${cards.map(card => card === JOKER ? `${values[jokerIndex++]}🤡` : RANKS[card % 13] + suits[Math.floor(card / 13)]).join(" ")}`;
+  });
   return `${shareText(run)}\n\nYour hands\n${hands.join("\n")}`;
 }
