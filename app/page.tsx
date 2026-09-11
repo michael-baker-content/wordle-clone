@@ -100,7 +100,7 @@ export default function Home() {
       if (!response.ok && response.status !== 409) throw new Error(data.error);
       accept(data);
       if (soundEnabled.current && response.ok && data.id === d.id && data.run.revision > d.run.revision) {
-        playSound(data.run.phase === "lost" ? "lose" : data.run.handsWon > d.run.handsWon ? "win" : ["between", "cleared"].includes(data.run.phase) ? "push" : "card");
+        playSound(isFinished(data.run) ? data.run.stars >= 3 ? "result-good" : "result-bad" : (data.run.strikes ?? 0) > (d.run.strikes ?? 0) ? "lose" : data.run.handsWon > d.run.handsWon ? "win" : data.run.phase === "between" ? "push" : "card");
       }
       if (response.status === 409) setNotice("Your latest progress has been restored. Review the table before playing.");
     };
@@ -143,6 +143,7 @@ export default function Home() {
       </div>
       <section className="table" aria-label="Blackjack table" aria-busy={busy || cardsAnimating}>
         {run && run.round > 0 && <><div className="table-top"><span>{run.round} played · {run.handsWon} won</span><span>Hand {run.round}</span></div><div className="hand-separator" aria-hidden="true" /></>}
+        <div className="strike-count" aria-label={`${run?.strikes ?? 0} of 3 strikes`}>{run?.strikes ?? 0} / 3 strikes</div>
         <CardTable table={{ id: run?.id ?? "loading", round: run?.round ?? 0, player: run?.player ?? [], dealer: run?.dealer ?? [] }} onAnimating={onCardsAnimating} />
         <div className="hand-separator message-separator" aria-hidden="true" />
         <p className="table-message" role="status">{busy ? "Loading…" : !run ? "Loading…" : cardsAnimating || run.phase === "ready" || run.phase === "player" ? "" : run.message}</p>
@@ -177,7 +178,7 @@ export default function Home() {
       <div className="rules-heading"><h2 id="help-title">Jacklet rules</h2><button className="help-button" aria-label="Close rules" onClick={closeHelp}>×</button></div>
       <p className="rules-intro">One daily run. See how far you get.</p>
       <ul className="rules-list">
-        <li><strong>Win or push</strong> to continue. A loss ends your run.</li>
+        <li><strong>Three strikes end your run.</strong> Each loss costs 100 points. Wins never remove strikes.</li>
         <li>Dealer stands on <strong>soft 17</strong> and checks blackjack. Naturals beat other 21s. No bets or splits.</li>
         <li><strong>100 points per win + 1 per revealed card.</strong> Dealer and losing cards count. Bust: reveal the hole card; no draws.</li>
         <li><strong>Jokers: 50, 100, 150 pts…</strong> Price rises each purchase this run. Worth 1–11; no deck card used. At 21, stand.</li>

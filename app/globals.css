@@ -19,10 +19,8 @@
 .table-top{justify-content:space-between;text-transform:uppercase}
 .hand-separator{border-top:1px solid #78968444;margin:24px 0}
 .message-separator{margin-bottom:0}
-.table-message{display:flex;align-items:center;justify-content:center;min-height:64px;margin:0;padding:16px 0;text-align:center}
-.table-message:empty{min-height:0;margin:0;padding:0}
-.table-message:not(:empty)+.table-actions{margin-top:0}
-.table-actions{margin-top:20px}
+.table-message{display:flex;align-items:safe center;justify-content:center;height:calc(2.8em + 32px);min-height:calc(2.8em + 32px);margin:0;padding:16px 0;text-align:center;overflow-y:auto}
+.table-actions{margin-top:0}
 .modal-heading{justify-content:flex-end}
 .wordmark,h1,.result h2,.help-dialog h2,.table-divider>span,.score>strong,.stats strong{
   font-family:var(--font-display),Georgia,serif;
@@ -71,6 +69,9 @@ h1{font-size:40px;font-weight:550;letter-spacing:-1.5px;line-height:1.12;text-wr
 .intro{line-height:1.5}
 .score>strong{min-width:2ch;transform-origin:right center}
 .score-digit{display:inline-block;transform-origin:50% 75%}
+.score-up{--score-accent:#9de4af}
+.score-down{--score-accent:#f1a09a}
+.score-count,.score-land{color:var(--score-accent);text-shadow:0 0 14px color-mix(in srgb,var(--score-accent) 28%,transparent)}
 button{position:relative;touch-action:manipulation;transition:transform 160ms cubic-bezier(.2,.8,.2,1),box-shadow 180ms ease,background-color 180ms ease,border-color 180ms ease,filter 180ms ease,opacity 180ms ease}
 .primary{box-shadow:0 2px 0 #101d164d,inset 0 1px 0 #fff6}
 .secondary{box-shadow:inset 0 1px 0 #ffffff0a}
@@ -84,11 +85,14 @@ button[aria-busy="true"]::after{content:"";display:inline-block;width:12px;heigh
 }
 button:active:not(:disabled){transform:translateY(1px) scale(.97);box-shadow:inset 0 2px 4px #0c171c25;transition-duration:70ms}
 @media(prefers-reduced-motion:no-preference){
-  .score-tick{animation:score-tick 130ms cubic-bezier(.16,1,.3,1) both}
-  .score-land{animation:score-land 520ms cubic-bezier(.16,1,.3,1) both}
+  .score-up.score-count{animation:score-rise 650ms ease-in-out infinite alternate}
+  .score-down.score-count{animation:score-shake 220ms ease-in-out infinite}
+  .score-land{animation:score-land 950ms cubic-bezier(.16,1,.3,1) both}
   button[aria-busy="true"]::after{animation:button-spin 750ms linear infinite}
   @keyframes score-tick{from{transform:translateY(3px) scale(.96);opacity:.72}to{transform:translateY(0) scale(1);opacity:1}}
-  @keyframes score-land{0%{transform:scale(1);text-shadow:none}30%{transform:scale(1.16);color:#ffe5a8;text-shadow:0 0 16px #dfbd764d}65%{transform:scale(.985)}100%{transform:scale(1);color:var(--gold);text-shadow:none}}
+  @keyframes score-rise{from{transform:scale(1)}to{transform:scale(1.055)}}
+  @keyframes score-shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-1.5px) rotate(-1deg)}75%{transform:translateX(1.5px) rotate(1deg)}}
+  @keyframes score-land{0%{transform:scale(1)}24%{transform:scale(1.24);text-shadow:0 0 24px var(--score-accent)}52%{transform:scale(.97)}72%{transform:scale(1.06)}100%{transform:scale(1);color:var(--gold);text-shadow:none}}
   @keyframes button-spin{to{transform:rotate(360deg)}}
 }
 @media(prefers-reduced-motion:reduce){
@@ -136,6 +140,15 @@ html,body{min-width:320px}
 .joker-corner small{display:block;font:9px Arial,sans-serif;margin-top:3px}
 .joker-mark{position:absolute;right:8px;bottom:10px;font-size:30px}
 .joker-button{width:100%;margin-top:10px}
+.strike-count{text-align:right;font-size:12px;color:#edb3a7;margin-bottom:12px}
+.practice-controls{display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin:20px 0}
+.practice-controls label{display:flex;flex-direction:column;gap:6px;color:var(--muted)}
+.sound-previews{border:1px solid var(--line);border-radius:10px;padding:12px;margin:0 0 20px;min-width:0}
+.sound-previews legend{color:var(--muted);font-size:13px;padding:0 6px}
+.sound-previews .practice-controls{margin:0;align-items:stretch}
+.sound-previews .practice-controls button{flex:1}
+.sound-previews .intro{margin-top:10px}
+.practice-controls select{font:inherit;padding:12px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px}
 .card-art img{position:absolute;z-index:2;inset:0;width:100%;height:100%;object-fit:fill}
 .card-art-back{border:3px solid #f6f0dc;border-radius:6px;background:repeating-linear-gradient(45deg,#355e52 0,#355e52 3px,#467664 3px,#467664 5px)}
 .readable-corner{position:absolute;z-index:1;top:3px;left:3px;width:25px;padding:2px 0 3px;background:#fffdf7;border-radius:2px;font-family:Arial,Helvetica,sans-serif;font-size:17px;font-weight:700;line-height:1;text-align:center;font-variant-numeric:lining-nums}
@@ -151,7 +164,7 @@ html,body{min-width:320px}
   .play-stage .hand{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center;margin-top:0}
   .play-stage .hand-separator{margin-top:16px;margin-bottom:16px}
   .play-stage .message-separator{margin-bottom:0}
-  .play-stage .table-message:not(:empty){flex:1 0 auto}
+  .play-stage .table-message{flex:1 0 calc(2.8em + 32px)}
   .score-treasure{font-size:22px;gap:3px}
 }
 @media(prefers-reduced-motion:no-preference){

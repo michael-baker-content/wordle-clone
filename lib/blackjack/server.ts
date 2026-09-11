@@ -1,12 +1,14 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import catalog from "./catalog.json";
+import ratings from "./ratings.json";
+import { practiceReplay, practiceStep } from "./practice.mjs";
 import { easternDay, nextReset } from "./dates";
-import { replay, initial, step, score, points, stars, finished, canPlayJoker, RULES_VERSION, type Action } from "./engine.mjs";
+import { initial, score, points, stars, finished, canPlayJoker, RULES_VERSION, type Action } from "./engine.mjs";
 import type { Run, Daily } from "./client";
 import { PROGRESS_VERSION } from "./progress";
 
 export type Entry = { rulesVersion: string; seed: number; deck: number[]; minimum: number; maximum: number; thresholds: number[]; pointThresholds: number[] };
-type Ticket = { id: string; version: string; moves: Action[]; jokerPricing?: number };
+type Ticket = { id: string; version: string; moves: Action[]; jokerPricing?: number; survival?: string };
 export const COOKIE = "daily-blackjack-v1";
 export function entryFor(id: string): Entry {
   const entry = (catalog as Record<string, Entry>)[id];
@@ -33,29 +35,14 @@ export function verify(token: unknown, id: string): Ticket | null {
     const entry = entryFor(id);
     const migrate = id === "2026-09-09" && ticket.version === "blackjack-v1" && entry.rulesVersion === "blackjack-v2";
     if (ticket.id !== id || (!migrate && ticket.version !== entry.rulesVersion) || !Array.isArray(ticket.moves) || ticket.moves.length > 104 || !ticket.moves.every(m => ["deal", "hit", "stand", "joker"].includes(m))) return null;
-    if (migrate) {
-      // Validate the signed old run before replaying it under today's updated rules.
-      replay(entry.deck, ticket.moves, "blackjack-v1");
-      let state = initial();
-      const moves: Action[] = [];
-      for (const move of ticket.moves) {
-        if (finished(state)) break;
-        state = step(state, move, entry.deck, entry.rulesVersion);
-        moves.push(move);
-      }
-      return { id, version: entry.rulesVersion, moves };
+    let state = initial();
+    const moves: Action[] = [];
+    for (const move of ticket.moves) {
+      if (ticket.survival !== "three-strikes-v1" && (finished(state) || (move === "joker" && !canPlayJoker(state)))) break;
+      state = practiceStep(state,move,entry.deck);
+      moves.push(move);
     }
-    if (ticket.moves.includes("joker") && ticket.jokerPricing !== 2) {
-      let state = initial();
-      const moves: Action[] = [];
-      for (const move of ticket.moves) {
-        if (finished(state) || (move === "joker" && !canPlayJoker(state))) break;
-        state = step(state, move, entry.deck, entry.rulesVersion);
-        moves.push(move);
-      }
-      return { id, version: entry.rulesVersion, moves, jokerPricing:2 };
-    }
-    return ticket;
+    return {id,version:entry.rulesVersion,moves,survival:"three-strikes-v1",...(moves.includes("joker") ? {jokerPricing:2} : {})};
   } catch { return null; }
 }
 export function cookieTicket(request: Request, id: string) {
@@ -63,27 +50,27 @@ export function cookieTicket(request: Request, id: string) {
   return verify(token, id);
 }
 export function runFor(id: string, moves: Action[]): Run {
-  const entry = entryFor(id), state = replay(entry.deck, moves, entry.rulesVersion);
+  const entry = entryFor(id), state = practiceReplay(entry.deck, moves);
   const playerHands: number[][] = [];
   let historyState = initial();
   for (const move of moves) {
-    historyState = step(historyState, move, entry.deck, entry.rulesVersion);
+    historyState = practiceStep(historyState, move, entry.deck);
     if (historyState.round > 0) playerHands[historyState.round - 1] = [...historyState.player];
   }
   // The hole card is always the fourth card of this hand's initial deal.
   const hole = state.hidden ? state.dealer[1] : undefined;
   return {
-    id, token: sign({ id, version: entry.rulesVersion, moves, ...(moves.includes("joker") ? {jokerPricing:2} : {}) }), revision: moves.length,
+    id, token: sign({ id, version: entry.rulesVersion, moves, survival:"three-strikes-v1", ...(moves.includes("joker") ? {jokerPricing:2} : {}) }), revision: moves.length,
     player: state.player, dealer: state.dealer.map((c, i) => state.hidden && i === 1 ? null : c),
-    phase: state.phase, score: points(state), cardsTurned: score(state), stars: finished(state) ? stars(points(state), entry.pointThresholds) : 0,
-    round: state.round, handsWon: state.handsWon, jokersBought: state.jokersBought ?? 0, canPlayJoker: canPlayJoker(state), playerHands, message: state.message,
+    phase: state.phase, score: points(state), cardsTurned: score(state), stars: finished(state) ? stars(points(state), (ratings as Record<string,{threeStrikes:{thresholds:number[]}}>)[id].threeStrikes.thresholds) : 0,
+    round: state.round, strikes: state.strikes ?? 0, handsWon: state.handsWon, jokersBought: state.jokersBought ?? 0, canPlayJoker: canPlayJoker(state), playerHands, message: state.message,
     revealed: entry.deck.slice(0, state.next).filter(c => c !== hole)
   };
 }
 export function dailyFor(moves: Action[] = [], now = new Date()): Daily {
   const id = easternDay(now);
   return { id, serverTime: now.toISOString(), resetsAt: nextReset(now).toISOString(),
-    rulesVersion: entryFor(id).rulesVersion, run: runFor(id, moves) };
+    rulesVersion: "three-strikes-v1", run: runFor(id, moves) };
 }
 export function responseFor(daily: Daily, status = 200) {
   return Response.json(daily, { status, headers: {

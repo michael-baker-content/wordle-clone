@@ -1,0 +1,2162 @@
+{
+  "2026-09-09": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 850,
+      "thresholds": [
+        175,
+        344,
+        513,
+        682
+      ],
+      "states": 297
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 850,
+      "thresholds": [
+        50,
+        242,
+        433,
+        624
+      ],
+      "states": 1175
+    }
+  },
+  "2026-09-10": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 952,
+      "thresholds": [
+        195,
+        384,
+        574,
+        763
+      ],
+      "states": 212
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 952,
+      "thresholds": [
+        50,
+        269,
+        487,
+        705
+      ],
+      "states": 967
+    }
+  },
+  "2026-09-11": {
+    "oneLoss": {
+      "minimum": 2,
+      "maximum": 802,
+      "thresholds": [
+        162,
+        322,
+        482,
+        642
+      ],
+      "states": 708
+    },
+    "threeStrikes": {
+      "minimum": -258,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        230,
+        410,
+        590
+      ],
+      "states": 2468
+    }
+  },
+  "2026-09-12": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 702,
+      "thresholds": [
+        145,
+        284,
+        424,
+        563
+      ],
+      "states": 586
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 702,
+      "thresholds": [
+        50,
+        202,
+        354,
+        505
+      ],
+      "states": 2438
+    }
+  },
+  "2026-09-13": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 902,
+      "thresholds": [
+        186,
+        365,
+        544,
+        723
+      ],
+      "states": 521
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2389
+    }
+  },
+  "2026-09-14": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 707
+    },
+    "threeStrikes": {
+      "minimum": -287,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2763
+    }
+  },
+  "2026-09-15": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 439
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1863
+    }
+  },
+  "2026-09-16": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 950,
+      "thresholds": [
+        195,
+        384,
+        573,
+        762
+      ],
+      "states": 414
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 950,
+      "thresholds": [
+        50,
+        268,
+        486,
+        704
+      ],
+      "states": 1521
+    }
+  },
+  "2026-09-17": {
+    "oneLoss": {
+      "minimum": 10,
+      "maximum": 899,
+      "thresholds": [
+        188,
+        366,
+        544,
+        722
+      ],
+      "states": 382
+    },
+    "threeStrikes": {
+      "minimum": -280,
+      "maximum": 899,
+      "thresholds": [
+        50,
+        255,
+        460,
+        664
+      ],
+      "states": 1804
+    }
+  },
+  "2026-09-18": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 701,
+      "thresholds": [
+        144,
+        283,
+        423,
+        562
+      ],
+      "states": 361
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 701,
+      "thresholds": [
+        50,
+        202,
+        353,
+        504
+      ],
+      "states": 1979
+    }
+  },
+  "2026-09-19": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 465
+    },
+    "threeStrikes": {
+      "minimum": -281,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        256,
+        461,
+        666
+      ],
+      "states": 1882
+    }
+  },
+  "2026-09-20": {
+    "oneLoss": {
+      "minimum": 2,
+      "maximum": 902,
+      "thresholds": [
+        182,
+        362,
+        542,
+        722
+      ],
+      "states": 452
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1906
+    }
+  },
+  "2026-09-21": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 902,
+      "thresholds": [
+        186,
+        365,
+        544,
+        723
+      ],
+      "states": 433
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2173
+    }
+  },
+  "2026-09-22": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 702,
+      "thresholds": [
+        146,
+        285,
+        424,
+        563
+      ],
+      "states": 373
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 702,
+      "thresholds": [
+        50,
+        202,
+        354,
+        505
+      ],
+      "states": 1756
+    }
+  },
+  "2026-09-23": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 702,
+      "thresholds": [
+        145,
+        284,
+        424,
+        563
+      ],
+      "states": 299
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 701,
+      "thresholds": [
+        50,
+        202,
+        353,
+        504
+      ],
+      "states": 1838
+    }
+  },
+  "2026-09-24": {
+    "oneLoss": {
+      "minimum": 37,
+      "maximum": 1002,
+      "thresholds": [
+        230,
+        423,
+        616,
+        809
+      ],
+      "states": 357
+    },
+    "threeStrikes": {
+      "minimum": -254,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        284,
+        518,
+        751
+      ],
+      "states": 1624
+    }
+  },
+  "2026-09-25": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 407
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 800,
+      "thresholds": [
+        50,
+        228,
+        406,
+        584
+      ],
+      "states": 1493
+    }
+  },
+  "2026-09-26": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 802,
+      "thresholds": [
+        166,
+        325,
+        484,
+        643
+      ],
+      "states": 595
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 2286
+    }
+  },
+  "2026-09-27": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 802,
+      "thresholds": [
+        164,
+        324,
+        483,
+        643
+      ],
+      "states": 629
+    },
+    "threeStrikes": {
+      "minimum": -287,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 2817
+    }
+  },
+  "2026-09-28": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 481
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1914
+    }
+  },
+  "2026-09-29": {
+    "oneLoss": {
+      "minimum": 2,
+      "maximum": 952,
+      "thresholds": [
+        192,
+        382,
+        572,
+        762
+      ],
+      "states": 249
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 952,
+      "thresholds": [
+        50,
+        269,
+        487,
+        705
+      ],
+      "states": 1031
+    }
+  },
+  "2026-09-30": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 852,
+      "thresholds": [
+        176,
+        345,
+        514,
+        683
+      ],
+      "states": 493
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 852,
+      "thresholds": [
+        50,
+        242,
+        434,
+        625
+      ],
+      "states": 2159
+    }
+  },
+  "2026-10-01": {
+    "oneLoss": {
+      "minimum": 8,
+      "maximum": 802,
+      "thresholds": [
+        167,
+        326,
+        485,
+        644
+      ],
+      "states": 327
+    },
+    "threeStrikes": {
+      "minimum": -281,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        408,
+        586
+      ],
+      "states": 1406
+    }
+  },
+  "2026-10-02": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 539
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2181
+    }
+  },
+  "2026-10-03": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 802,
+      "thresholds": [
+        166,
+        325,
+        484,
+        643
+      ],
+      "states": 447
+    },
+    "threeStrikes": {
+      "minimum": -279,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        408,
+        586
+      ],
+      "states": 1865
+    }
+  },
+  "2026-10-04": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 417
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1762
+    }
+  },
+  "2026-10-05": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 311
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1428
+    }
+  },
+  "2026-10-06": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 902,
+      "thresholds": [
+        184,
+        364,
+        543,
+        723
+      ],
+      "states": 516
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2188
+    }
+  },
+  "2026-10-07": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 702,
+      "thresholds": [
+        144,
+        284,
+        423,
+        563
+      ],
+      "states": 295
+    },
+    "threeStrikes": {
+      "minimum": -282,
+      "maximum": 702,
+      "thresholds": [
+        50,
+        202,
+        354,
+        506
+      ],
+      "states": 1734
+    }
+  },
+  "2026-10-08": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 732
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        664
+      ],
+      "states": 2633
+    }
+  },
+  "2026-10-09": {
+    "oneLoss": {
+      "minimum": 34,
+      "maximum": 902,
+      "thresholds": [
+        208,
+        382,
+        555,
+        729
+      ],
+      "states": 538
+    },
+    "threeStrikes": {
+      "minimum": -257,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        257,
+        464,
+        671
+      ],
+      "states": 2160
+    }
+  },
+  "2026-10-10": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 610
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2330
+    }
+  },
+  "2026-10-11": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 702,
+      "thresholds": [
+        146,
+        285,
+        424,
+        563
+      ],
+      "states": 343
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 702,
+      "thresholds": [
+        50,
+        202,
+        354,
+        505
+      ],
+      "states": 1581
+    }
+  },
+  "2026-10-12": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 900,
+      "thresholds": [
+        184,
+        363,
+        542,
+        721
+      ],
+      "states": 451
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 900,
+      "thresholds": [
+        50,
+        255,
+        459,
+        663
+      ],
+      "states": 1829
+    }
+  },
+  "2026-10-13": {
+    "oneLoss": {
+      "minimum": 2,
+      "maximum": 1002,
+      "thresholds": [
+        202,
+        402,
+        602,
+        802
+      ],
+      "states": 689
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        282,
+        514,
+        745
+      ],
+      "states": 2285
+    }
+  },
+  "2026-10-14": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 802,
+      "thresholds": [
+        164,
+        324,
+        483,
+        643
+      ],
+      "states": 506
+    },
+    "threeStrikes": {
+      "minimum": -288,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        228,
+        406,
+        584
+      ],
+      "states": 2330
+    }
+  },
+  "2026-10-15": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 512
+    },
+    "threeStrikes": {
+      "minimum": -176,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        236,
+        422,
+        607
+      ],
+      "states": 2232
+    }
+  },
+  "2026-10-16": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 1002,
+      "thresholds": [
+        205,
+        404,
+        604,
+        803
+      ],
+      "states": 227
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        282,
+        514,
+        745
+      ],
+      "states": 1202
+    }
+  },
+  "2026-10-17": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 1002,
+      "thresholds": [
+        206,
+        405,
+        604,
+        803
+      ],
+      "states": 948
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        282,
+        514,
+        745
+      ],
+      "states": 3335
+    }
+  },
+  "2026-10-18": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 459
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1767
+    }
+  },
+  "2026-10-19": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 539
+    },
+    "threeStrikes": {
+      "minimum": -281,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1859
+    }
+  },
+  "2026-10-20": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 502
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1553
+    }
+  },
+  "2026-10-21": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 701,
+      "thresholds": [
+        145,
+        284,
+        423,
+        562
+      ],
+      "states": 335
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 701,
+      "thresholds": [
+        50,
+        202,
+        354,
+        505
+      ],
+      "states": 1754
+    }
+  },
+  "2026-10-22": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 194
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1405
+    }
+  },
+  "2026-10-23": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 902,
+      "thresholds": [
+        186,
+        365,
+        544,
+        723
+      ],
+      "states": 655
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2634
+    }
+  },
+  "2026-10-24": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 1002,
+      "thresholds": [
+        205,
+        404,
+        604,
+        803
+      ],
+      "states": 345
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        282,
+        514,
+        745
+      ],
+      "states": 1615
+    }
+  },
+  "2026-10-25": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 951,
+      "thresholds": [
+        195,
+        384,
+        573,
+        762
+      ],
+      "states": 431
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 951,
+      "thresholds": [
+        50,
+        268,
+        486,
+        704
+      ],
+      "states": 1523
+    }
+  },
+  "2026-10-26": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 684
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 2531
+    }
+  },
+  "2026-10-27": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 952,
+      "thresholds": [
+        194,
+        384,
+        573,
+        763
+      ],
+      "states": 369
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 952,
+      "thresholds": [
+        50,
+        269,
+        487,
+        705
+      ],
+      "states": 2136
+    }
+  },
+  "2026-10-28": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 910
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        664
+      ],
+      "states": 3607
+    }
+  },
+  "2026-10-29": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 489
+    },
+    "threeStrikes": {
+      "minimum": -287,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2004
+    }
+  },
+  "2026-10-30": {
+    "oneLoss": {
+      "minimum": 2,
+      "maximum": 701,
+      "thresholds": [
+        142,
+        282,
+        422,
+        562
+      ],
+      "states": 443
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 702,
+      "thresholds": [
+        50,
+        202,
+        354,
+        505
+      ],
+      "states": 2618
+    }
+  },
+  "2026-10-31": {
+    "oneLoss": {
+      "minimum": 33,
+      "maximum": 952,
+      "thresholds": [
+        217,
+        401,
+        585,
+        769
+      ],
+      "states": 685
+    },
+    "threeStrikes": {
+      "minimum": -258,
+      "maximum": 952,
+      "thresholds": [
+        50,
+        270,
+        490,
+        710
+      ],
+      "states": 2785
+    }
+  },
+  "2026-11-01": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 802,
+      "thresholds": [
+        166,
+        325,
+        484,
+        643
+      ],
+      "states": 814
+    },
+    "threeStrikes": {
+      "minimum": -254,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        231,
+        411,
+        591
+      ],
+      "states": 2883
+    }
+  },
+  "2026-11-02": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 601,
+      "thresholds": [
+        124,
+        243,
+        363,
+        482
+      ],
+      "states": 87
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 601,
+      "thresholds": [
+        50,
+        175,
+        300,
+        424
+      ],
+      "states": 997
+    }
+  },
+  "2026-11-03": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 801,
+      "thresholds": [
+        165,
+        324,
+        483,
+        642
+      ],
+      "states": 535
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 801,
+      "thresholds": [
+        50,
+        228,
+        406,
+        584
+      ],
+      "states": 1932
+    }
+  },
+  "2026-11-04": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 802,
+      "thresholds": [
+        166,
+        325,
+        484,
+        643
+      ],
+      "states": 494
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 702,
+      "thresholds": [
+        50,
+        202,
+        354,
+        505
+      ],
+      "states": 1783
+    }
+  },
+  "2026-11-05": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 701,
+      "thresholds": [
+        145,
+        284,
+        423,
+        562
+      ],
+      "states": 264
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 700,
+      "thresholds": [
+        50,
+        201,
+        352,
+        503
+      ],
+      "states": 1322
+    }
+  },
+  "2026-11-06": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 476
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2026
+    }
+  },
+  "2026-11-07": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 446
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1650
+    }
+  },
+  "2026-11-08": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 275
+    },
+    "threeStrikes": {
+      "minimum": -180,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        262,
+        474,
+        685
+      ],
+      "states": 990
+    }
+  },
+  "2026-11-09": {
+    "oneLoss": {
+      "minimum": 8,
+      "maximum": 1002,
+      "thresholds": [
+        207,
+        406,
+        605,
+        804
+      ],
+      "states": 575
+    },
+    "threeStrikes": {
+      "minimum": -282,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        282,
+        514,
+        746
+      ],
+      "states": 2199
+    }
+  },
+  "2026-11-10": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 1002,
+      "thresholds": [
+        205,
+        404,
+        604,
+        803
+      ],
+      "states": 384
+    },
+    "threeStrikes": {
+      "minimum": -257,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        284,
+        518,
+        751
+      ],
+      "states": 1737
+    }
+  },
+  "2026-11-11": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 902,
+      "thresholds": [
+        186,
+        365,
+        544,
+        723
+      ],
+      "states": 450
+    },
+    "threeStrikes": {
+      "minimum": -282,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        256,
+        461,
+        666
+      ],
+      "states": 1525
+    }
+  },
+  "2026-11-12": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 353
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1732
+    }
+  },
+  "2026-11-13": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 607
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 2229
+    }
+  },
+  "2026-11-14": {
+    "oneLoss": {
+      "minimum": 7,
+      "maximum": 950,
+      "thresholds": [
+        196,
+        385,
+        573,
+        762
+      ],
+      "states": 734
+    },
+    "threeStrikes": {
+      "minimum": -281,
+      "maximum": 950,
+      "thresholds": [
+        50,
+        268,
+        486,
+        704
+      ],
+      "states": 2605
+    }
+  },
+  "2026-11-15": {
+    "oneLoss": {
+      "minimum": 11,
+      "maximum": 1002,
+      "thresholds": [
+        210,
+        408,
+        606,
+        804
+      ],
+      "states": 682
+    },
+    "threeStrikes": {
+      "minimum": -280,
+      "maximum": 1002,
+      "thresholds": [
+        50,
+        282,
+        514,
+        746
+      ],
+      "states": 2506
+    }
+  },
+  "2026-11-16": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 701,
+      "thresholds": [
+        144,
+        283,
+        423,
+        562
+      ],
+      "states": 341
+    },
+    "threeStrikes": {
+      "minimum": -287,
+      "maximum": 602,
+      "thresholds": [
+        50,
+        175,
+        300,
+        425
+      ],
+      "states": 1466
+    }
+  },
+  "2026-11-17": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 541
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 2282
+    }
+  },
+  "2026-11-18": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 902,
+      "thresholds": [
+        186,
+        365,
+        544,
+        723
+      ],
+      "states": 346
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1431
+    }
+  },
+  "2026-11-19": {
+    "oneLoss": {
+      "minimum": 4,
+      "maximum": 901,
+      "thresholds": [
+        184,
+        363,
+        543,
+        722
+      ],
+      "states": 331
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        664
+      ],
+      "states": 1581
+    }
+  },
+  "2026-11-20": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 443
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1730
+    }
+  },
+  "2026-11-21": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 376
+    },
+    "threeStrikes": {
+      "minimum": -180,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        262,
+        474,
+        685
+      ],
+      "states": 1435
+    }
+  },
+  "2026-11-22": {
+    "oneLoss": {
+      "minimum": 63,
+      "maximum": 1052,
+      "thresholds": [
+        261,
+        459,
+        657,
+        855
+      ],
+      "states": 452
+    },
+    "threeStrikes": {
+      "minimum": -226,
+      "maximum": 1052,
+      "thresholds": [
+        50,
+        299,
+        548,
+        797
+      ],
+      "states": 1717
+    }
+  },
+  "2026-11-23": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 799,
+      "thresholds": [
+        165,
+        324,
+        482,
+        641
+      ],
+      "states": 212
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1155
+    }
+  },
+  "2026-11-24": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 349
+    },
+    "threeStrikes": {
+      "minimum": -287,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        407,
+        585
+      ],
+      "states": 1498
+    }
+  },
+  "2026-11-25": {
+    "oneLoss": {
+      "minimum": 6,
+      "maximum": 952,
+      "thresholds": [
+        196,
+        385,
+        574,
+        763
+      ],
+      "states": 478
+    },
+    "threeStrikes": {
+      "minimum": -286,
+      "maximum": 952,
+      "thresholds": [
+        50,
+        269,
+        487,
+        705
+      ],
+      "states": 1626
+    }
+  },
+  "2026-11-26": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 802,
+      "thresholds": [
+        165,
+        324,
+        484,
+        643
+      ],
+      "states": 415
+    },
+    "threeStrikes": {
+      "minimum": -282,
+      "maximum": 802,
+      "thresholds": [
+        50,
+        229,
+        408,
+        586
+      ],
+      "states": 1749
+    }
+  },
+  "2026-11-27": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 800,
+      "thresholds": [
+        164,
+        323,
+        482,
+        641
+      ],
+      "states": 313
+    },
+    "threeStrikes": {
+      "minimum": -178,
+      "maximum": 800,
+      "thresholds": [
+        50,
+        235,
+        420,
+        605
+      ],
+      "states": 1773
+    }
+  },
+  "2026-11-28": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 770
+    },
+    "threeStrikes": {
+      "minimum": -287,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2533
+    }
+  },
+  "2026-11-29": {
+    "oneLoss": {
+      "minimum": 7,
+      "maximum": 902,
+      "thresholds": [
+        186,
+        365,
+        544,
+        723
+      ],
+      "states": 506
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1672
+    }
+  },
+  "2026-11-30": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 799,
+      "thresholds": [
+        164,
+        323,
+        482,
+        641
+      ],
+      "states": 585
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 799,
+      "thresholds": [
+        50,
+        228,
+        406,
+        583
+      ],
+      "states": 2192
+    }
+  },
+  "2026-12-01": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 375
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        664
+      ],
+      "states": 1574
+    }
+  },
+  "2026-12-02": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 400
+    },
+    "threeStrikes": {
+      "minimum": -283,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 1797
+    }
+  },
+  "2026-12-03": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 582
+    },
+    "threeStrikes": {
+      "minimum": -285,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2329
+    }
+  },
+  "2026-12-04": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 951,
+      "thresholds": [
+        195,
+        384,
+        573,
+        762
+      ],
+      "states": 272
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 951,
+      "thresholds": [
+        50,
+        268,
+        486,
+        704
+      ],
+      "states": 1460
+    }
+  },
+  "2026-12-05": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 902,
+      "thresholds": [
+        185,
+        364,
+        544,
+        723
+      ],
+      "states": 593
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 902,
+      "thresholds": [
+        50,
+        255,
+        460,
+        665
+      ],
+      "states": 2330
+    }
+  },
+  "2026-12-06": {
+    "oneLoss": {
+      "minimum": 5,
+      "maximum": 901,
+      "thresholds": [
+        185,
+        364,
+        543,
+        722
+      ],
+      "states": 232
+    },
+    "threeStrikes": {
+      "minimum": -284,
+      "maximum": 901,
+      "thresholds": [
+        50,
+        255,
+        460,
+        664
+      ],
+      "states": 1114
+    }
+  },
+  "2026-12-07": {
+    "oneLoss": {
+      "minimum": 18,
+      "maximum": 751,
+      "thresholds": [
+        165,
+        312,
+        458,
+        605
+      ],
+      "states": 423
+    },
+    "threeStrikes": {
+      "minimum": -274,
+      "maximum": 751,
+      "thresholds": [
+        50,
+        216,
+        381,
+        546
+      ],
+      "states": 2120
+    }
+  }
+}

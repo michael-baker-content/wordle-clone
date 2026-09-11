@@ -5,6 +5,7 @@ import { easternDay, nextReset } from "../lib/blackjack/dates";
 import { readHistory, statistics, shareText, detailedShareText } from "../lib/blackjack/client";
 import { dailyFor, runFor, verify, sign } from "../lib/blackjack/server";
 import catalog from "../lib/blackjack/catalog.json";
+import { practiceReplay } from "../lib/blackjack/practice.mjs";
 
 test("detailed results recover every player hand from saved actions", () => {
   const id = "2026-09-09", entry = catalog[id];
@@ -214,7 +215,7 @@ test("signed progress rejects tampering and wrong dates", () => {
 test("today uses updated rules and migrates signed legacy runs", () => {
   const id = "2026-09-09", entry = catalog[id];
   assert.equal(entry.rulesVersion,"blackjack-v2");
-  assert.equal(dailyFor([],new Date("2026-09-09T12:00:00Z")).rulesVersion,"blackjack-v2");
+  assert.equal(dailyFor([],new Date("2026-09-09T12:00:00Z")).rulesVersion,"three-strikes-v1");
   let checked = 0;
   function visit(state: State, moves: Action[]) {
     if (!finished(state)) {
@@ -224,8 +225,7 @@ test("today uses updated rules and migrates signed legacy runs", () => {
     const ticket = verify(sign({id,version:"blackjack-v1",moves}),id);
     assert.ok(ticket);
     assert.equal(ticket.version,"blackjack-v2");
-    const updated = replay(entry.deck,ticket.moves,"blackjack-v2");
-    assert.ok(finished(updated));
+    const updated = practiceReplay(entry.deck,ticket.moves);
     assert.deepEqual(ticket.moves,moves.slice(0,ticket.moves.length));
     const run = runFor(id,ticket.moves);
     assert.equal(run.score,points(updated));

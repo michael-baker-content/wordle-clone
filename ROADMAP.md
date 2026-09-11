@@ -2,6 +2,10 @@
 
 ## Current game
 
+- Daily and practice now share three persistent strikes, −100 points per loss,
+  and ratings calculated over all legal joker choices. Final sounds play automatically
+  for 1–2 versus 3–5 stars. The separate ratings file covers all 90 scheduled dates.
+
 - One 52-card deck per Eastern calendar day; one run in the current browser.
 - Hit and stand; no betting. Dealer stands on soft 17; blackjack outranks other 21s.
 - Score is 100 points per win plus revealed cards, minus joker costs. Jokers cost 50, 100, 150 points and so on across each run; their value adjusts from 1–11. Detailed results show values before 🤡.

@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
     "seeds:generate": "node scripts/generate-seeds.mjs",
-    "cards:fetch": "node scripts/fetch-cards.mjs"
+    "cards:fetch": "node scripts/fetch-cards.mjs",
+    "strikes:analyze": "node scripts/analyze-strikes.mjs",
+    "ratings:generate": "node scripts/generate-ratings.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",
