@@ -1,7 +1,7 @@
 # Jacklet
 
 Branding uses Jacklet with the subtitle “daily blackjack” and a spade favicon.
-Progress version `jacklet-v2` starts a new game for all browsers: old runs, statistics,
+Progress version `jacklet-v3` starts a new game for all browsers: old runs, statistics,
 sound preferences, and dismissed instructions are reset on the next load.
 Old saved tokens are rejected and the recovery cookie is replaced automatically.
 Change `PROGRESS_VERSION` in `lib/blackjack/progress.ts` only for a deliberate global
@@ -42,7 +42,7 @@ A Next.js / React daily blackjack survival game. Every player gets the same appr
 
 ## Local setup
 
-### Experimental three-strike practice
+### Local practice
 
 With the local development server running, open http://localhost:3000/practice.
 Choose any scheduled date and use Restart run as often as you like. This tests
@@ -56,16 +56,15 @@ statistics, streaks, or shared results. Stars use the same precomputed per-date 
 404 outside development mode, including Vercel deployments and local production builds.
 Keep the development server private; this gate is not authentication.
 
-The official daily game now also uses three strikes. Deck order and the progress
-version remain unchanged; older signed moves are replayed with strike penalties.
-A formerly completed first-loss run can therefore continue. Old joker sequences
-are truncated at a purchase that is no longer affordable.
+Official daily play and practice both use three strikes. The Neon integration
+starts a fresh `jacklet-v3` generation; previous browser runs are not imported.
+Deck order is unchanged.
 See THREE_STRIKES_ANALYSIS.md for the 90-deck comparison.
 Run `npm run strikes:analyze` to print ordinary-strategy results, or
 `npm run strikes:analyze -- --oracle` to also calculate perfect-information ceilings.
 The analysis reads the catalog and prints JSON; it never rewrites decks or ratings.
 
-The existing dependencies are unchanged. With Node.js 20.9+:
+With Node.js 20.9+:
 
 ```sh
 npm install
@@ -83,10 +82,12 @@ npm run typecheck
 npm run build
 ```
 
-Run these checks before pushing. Earlier rules and scoring changes passed validation;
-the latest joker, reset, sound, and preview changes require a fresh run. Tests cover
+The Neon setup procedure, tests, typecheck, and production build were completed
+locally for this storage update. Live production recovery and persistence should
+still be checked after deployment. Run these checks again after code changes. Tests cover
 rules, escalating joker costs, resolved joker values, signed progress, automatic
-resets, sharing, responsive card limits, and date handling. Catalog checks validate
+resets, sharing, responsive card limits, date handling, anonymous identity,
+concurrent requests, completed-run lockout, and failed-save recovery. Catalog checks validate
 the original no-joker proofs; they do not evaluate joker strategies.
 
 The tests cover ace totals, alternating deals, hidden cards, naturals, ties, soft 17, dealer draws, bust scoring, full/partial deck exhaustion, terminal action rejection, exhaustive score analysis, the entire approved catalog, signed tokens, spoiler-free sharing, participation streaks, and Eastern daylight saving transitions.
@@ -118,7 +119,7 @@ no rating search runs during gameplay.
 - Deal order: player, dealer up card, player, dealer hole card.
 - Aces count as 1 or 11; face cards count as 10. Dealer stands on all 17s.
 - Dealer checks for an initial blackjack when showing an ace or a ten-value card. A player's natural also settles immediately. A natural beats a non-natural 21; two naturals push.
-- Hit or stand. A player reaching 21 automatically stands. A player bust ends the run, reveals the hole card, and does not trigger dealer draws.
+- Hit or stand. A player reaching 21 automatically stands. A player bust ends the hand, adds a strike, reveals the hole card, and does not trigger dealer draws. The run continues if fewer than three strikes and enough cards remain.
 - Wins, pushes, and the first two losses allow another hand when enough cards remain.
 - Strikes persist through wins and cost 100 points each. The third loss ends the run.
 - Every revealed card counts exactly once, including the losing hand and dealer hole card after settlement. Dealing a hidden hole card alone does not increment the card portion of the score. The combined score is 100 per settled win plus revealed cards, minus 100 per strike and all joker costs.
@@ -156,7 +157,7 @@ npm run ratings:generate
 npm test
 ```
 
-Commit and deploy the updated catalog. Generation appends after the last scheduled date and never overwrites an existing date. Missing dates return an explicit unavailable response rather than silently reusing a deck or supplying an unverified seed. Do not change published decks, thresholds, or rule versions mid-day.
+Commit and deploy the updated catalog. Generation appends after the last scheduled date and never overwrites an existing date. Missing dates return an explicit unavailable response rather than silently reusing a deck or supplying an unverified seed. During the prototype, changes to an active day's rules, deck, or scoring should accompany a deliberate generation reset. Once launched, keep published daily challenges stable.
 
 ## Vercel and the existing secret
 
@@ -170,24 +171,60 @@ deployments cannot supply a public preview.
 
 Keep the existing `PUZZLE_SECRET` environment variable in Vercel. It now **signs saved action histories**, rather than generating answers. Use the same stable secret across instances and deployments. A local fallback is provided in development; production requires an explicit value. Changing it invalidates saved run tokens. Never prefix it with `NEXT_PUBLIC_`.
 
-Use a normal Next.js deployment, not static export. No new packages or database are required. Assets should be committed before deployment, and the seed catalog should remain in the private repository: making the repository public exposes future decks and solutions even though they are not sent to browsers.
+Use a normal Next.js deployment, not static export. Official production storage uses Neon and `@neondatabase/serverless`. Assets should be committed before deployment, and the seed catalog should remain in the private repository: making the repository public exposes future decks and solutions even though they are not sent to browsers.
 
 ## Persistence and one-run limits
 
-Blackjack uses separate browser storage keys; existing number-game history is left untouched. Current-day progress is replayed and validated on the server. The API returns only current visible cards and previously revealed cards, never the hidden card or future deck. Signed tokens prevent clients from fabricating arbitrary action histories. An HttpOnly cookie recovers the latest run after dropped responses; browser storage retains local statistics and provides a second recovery copy. Web Locks serialize player actions between tabs when available.
+Current-day progress is replayed and validated on the server. The API returns only current visible cards and previously revealed cards, never the hidden card or future deck. Signed tokens prevent clients from fabricating arbitrary action histories. Browser storage retains local participation statistics. Web Locks serialize player actions between tabs when available. In database-free development and previews, the signed run cookie and browser history provide recovery; with Neon, recovery uses the database record identified by the player cookie.
 
-This is still a no-account, no-database MVP. One run is enforced in the normal current-browser flow, not as a tamper-proof identity guarantee. Clearing all browser data, using another browser, replaying older legitimately signed tokens after clearing cookies, or racing requests outside the UI can bypass it. A durable anonymous session store is needed for stronger enforcement and exactly-once updates. A lost network response that never stores its cookie cannot be proven accepted without such a store. See ROADMAP.md.
+When Neon is configured, the database is authoritative: signed browser histories cannot overwrite it. An anonymous, signed HttpOnly `jacklet-player` cookie identifies the browser. Each action updates one daily record atomically; stale tabs and duplicate requests receive the saved state instead of applying another action. Reloading recovers a committed action even if its response was lost. Completed runs cannot change. Clearing the player cookie or using a different browser still creates a new identity; this is not one-person enforcement. Accounts are deferred.
+
+## Neon storage setup
+
+1. Put `DATABASE_URL` and/or `DATABASE_URL_POOLED` in `.env.local`. Runtime prefers the pooled URL; schema setup prefers the direct URL. Both must target the same database/branch. Keep these and `PUZZLE_SECRET` server-only.
+2. Run `npm install` to install the new driver and update `package-lock.json`.
+3. Run `npm run db:setup` once against the configured database. It creates `jacklet_runs` and its index transactionally without deleting existing results. Alternatively, execute `db/schema.sql` in Neon's SQL editor. Future schema changes need explicit migrations; rerunning setup does not alter existing columns.
+4. Run `npm test`, `npm run typecheck`, and `npm run build`, then restart the local server.
+5. Commit the updated lockfile with the implementation and deploy. Production environment variables are already configured in Vercel; the table must exist before deployment.
+
+Setup is complete for the current prototype database. Ordinary deployments do not
+need another `db:setup`. Vercel currently has database variables for Production only;
+Preview deployments intentionally use browser-only progress. After the first
+production deployment, deal, refresh, and inspect `/api/stats` in the same browser
+to confirm that the production connection works. The stats response should show
+one started run; completing it should increment completed and populate recent results.
+
+`VERCEL_ENV` separates production and preview records; local development uses `development`, and a local production build uses `production`. Use a separate Neon branch for local production testing if it must not share production records. Practice never calls the database. Preview deployments with no database variables retain browser-only gameplay; production requires working database configuration and returns a recoverable error if it is missing or unavailable. A configured database failure never silently falls back to browser-only saves.
+
+Visiting the game does not insert a run. The first deal records its start; subsequent actions update progress and the last action records completion. Stored fields include anonymous identity, puzzle date, generation, rules version, decisions, score, stars, cards revealed, hand counts, strikes, joker purchases, and server timestamps. No IP addresses, emails, hidden/future deck data, or practice results are stored. Start-to-completion time is elapsed time, including breaks, not measured active play time. An unfinished record is not proof of abandonment.
+
+`GET /api/stats` returns only the current cookie's started/completed counts, best and average completed score, and ten recent completed results. No player ID can be supplied in the URL. Negative scores are included; no completed results gives null best/average. This endpoint prepares the stats modal; the existing interface still uses local participation statistics. No third-party analytics has been added.
+
+### Prototype resets
+
+This is a disposable prototype. Bump `PROGRESS_VERSION` in `lib/blackjack/progress.ts` and redeploy/restart to start a fresh generation. This invalidates run tokens and player identities, switches browser history/preferences to fresh keys, and excludes all previous database generations. Decks and rules are unaffected. Old database rows remain until deliberately deleted; old local keys are ignored. Ordinary deployments do not reset progress.
+
+For physical cleanup, after the new generation is deployed, use Neon's SQL editor to inspect rows grouped by `environment, generation` and delete only the retired generations for the intended environment. Do not truncate the table on a live generation: existing browsers would retain their old local history. Schema setup never deletes data. Keep obsolete deployments from accepting traffic after a reset.
+
+Manual storage checks: deal once, refresh, and verify one row with revision 1; submit competing actions from two tabs and verify only one advances; finish and refresh to verify the result is unchanged; visit `/api/stats` in that browser; confirm another browser has no history; play `/practice` and verify no records change. Simulate a dropped response and recover the accepted revision. Test a database outage and confirm Recover run works once service returns. Tests use an in-memory store for request orchestration; these manual checks also verify real PostgreSQL behavior.
 
 ## Main files
 
 - `lib/blackjack/engine.mjs`: deterministic rules, shuffle, exhaustive analyzer, score bands.
 - `lib/blackjack/catalog.json`: approved daily decks and proofs, server-only import.
 - `lib/blackjack/server.ts`: signed progress and redacted client views.
+- `lib/blackjack/database.ts`: Neon queries, atomic run updates, and personal statistics.
+- `lib/blackjack/identity.ts`: signed anonymous player cookies and environment separation.
+- `lib/blackjack/persistence.ts`: authoritative recovery and action coordination.
+- `db/schema.sql`: run table and daily-results index.
+- `scripts/setup-database.mjs`: repeatable, non-destructive schema setup.
 - `app/api/blackjack/route.ts`: daily state, action validation, recovery.
+- `app/api/stats/route.ts`: private statistics for the current anonymous player.
 - `lib/blackjack/client.ts`: local statistics, storage, sharing.
 - `app/page.tsx`: mobile-first card table and dialogs.
 - `scripts/generate-seeds.mjs`: append approved dates offline.
 - `scripts/fetch-cards.mjs`: vendor CC0 card art and license.
 - `tests/blackjack.test.ts`: rules and integration checks.
+- `tests/persistence.test.ts`: persistence flow tests using an in-memory store.
 
 Card source: [Letele's playing cards](https://github.com/letele/playing-cards), based on [Adrian Kennard's designs](https://www.me.uk/cards/), distributed under CC0 1.0.

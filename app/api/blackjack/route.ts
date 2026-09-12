@@ -2,12 +2,18 @@ import { easternDay } from "../../../lib/blackjack/dates";
 import { actions, canPlayJoker, type Action } from "../../../lib/blackjack/engine.mjs";
 import { practiceReplay } from "../../../lib/blackjack/practice.mjs";
 import { cookieTicket, dailyFor, entryFor, responseFor, verify } from "../../../lib/blackjack/server";
+import * as store from "../../../lib/blackjack/database";
+import { loadPersistent, playPersistent } from "../../../lib/blackjack/persistence";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const error = (message: string, status: number) => Response.json({ error: message }, { status, headers: { "Cache-Control": "no-store" } });
-export function GET(request: Request) {
+function useDatabase() {
+  return store.databaseEnabled() || (process.env.NODE_ENV === "production" && process.env.VERCEL_ENV !== "preview");
+}
+export async function GET(request: Request) {
   try {
+    if (useDatabase()) return await loadPersistent(request, new Date(), store);
     const now = new Date(), id = easternDay(now), ticket = cookieTicket(request, id);
     return responseFor(dailyFor(ticket?.moves ?? [], now));
   } catch { return error("Today’s deck is unavailable. Please check back shortly.", 503); }
@@ -19,6 +25,8 @@ export async function POST(request: Request) {
     const raw = await request.text();
     if (raw.length > 6000) return error("Request too large.", 413);
     const body = JSON.parse(raw);
+    if (!body || typeof body !== "object" || Array.isArray(body)) return error("That action could not be read.", 400);
+    if (useDatabase()) return await playPersistent(request, body, new Date(), store);
     const now = new Date(), id = easternDay(now), cookie = cookieTicket(request, id);
     if (body?.id !== id) return responseFor(dailyFor(cookie?.moves ?? [], now), 409);
     const ticket = verify(body.token, id);
